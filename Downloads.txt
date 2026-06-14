@@ -1,0 +1,5 @@
+Backend
+npm i express mongoose multer @imagekit/nodejs dotenv bcryptjs jsonwebtoken cookie-parser
+
+Frontend
+npm i react-router-dom lucid-react axios
