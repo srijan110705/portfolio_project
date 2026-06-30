@@ -31,7 +31,7 @@ const AdminHome = () => {
       });
 
       // Navigate to AdminHome on success
-      navigate('/admin/home'); 
+      navigate('/edit_about'); 
       
     } catch (err) {
       setError(err.response?.data?.message || 'An error occurred during registration.');

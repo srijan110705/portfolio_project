@@ -2,42 +2,51 @@ const adminModel=require("../models/admin.model");
 const jwt=require("jsonwebtoken");
 const bcrypt=require("bcryptjs");
 
-async function register(req,res){
-    const {email,password}=req.body;
+async function register(req, res) {
+  try {
+    const { email, password } = req.body;
 
-    const isAccountAlreadyExists=await adminModel.findOne({email})
+    const isAccountAlreadyExists = await adminModel.findOne({ email });
 
-    if(isAccountAlreadyExists){
-        return res.status(409).json({
-            message:"Account with these credentials already exist"
-        })
+    if (isAccountAlreadyExists) {
+      return res.status(409).json({
+        message: "Account with these credentials already exist"
+      });
     }
 
-    const hash=await bcrypt.hash(password,10);
+    const hash = await bcrypt.hash(password, 10);
 
-    const admin=await adminModel.create({
-        email,
-        password:hash
-    })
+    const admin = await adminModel.create({
+      email,
+      password: hash
+    });
 
-    const token=jwt.sign({
-        id:admin._id
-    },process.env.JWT_SECRET)
+    const token = jwt.sign(
+      { id: admin._id },
+      process.env.JWT_SECRET
+    );
 
     res.cookie('token', token, {
-  httpOnly: true,
-  secure: true,           // Required for HTTPS
-  sameSite: 'none',       // Crucial for cross-origin cookies
-  maxAge: 3600000 
-});
+      httpOnly: true,
+      secure: true,       // Required for HTTPS
+      sameSite: 'none',   // Crucial for cross-origin cookies
+      maxAge: 3600000 
+    });
 
     res.status(201).json({
-        message:"New admin registered successfully",
-        admin:{
-            id:admin._id,
-            email:admin.email
-        }
-    })
+      message: "New admin registered successfully",
+      admin: {
+        id: admin._id,
+        email: admin.email
+      }
+    });
+
+  } catch (error) {
+    console.error("Registration Error:", error);
+    res.status(500).json({ 
+      message: error.message || "Internal Server Error" 
+    });
+  }
 }
 
 async function login(req,res){

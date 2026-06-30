@@ -13,7 +13,7 @@ const NavAdmin = () => {
 
   return (
     <div className="flex flex-wrap gap-3 mb-8 p-4 bg-slate-50/50 rounded-xl border border-slate-100">
-      <Link to="/adminHome" className={getButtonClass("/adminHome")}>Dashboard</Link>
+      <Link to="/adminHome" className={getButtonClass("/adminHome")}>Register Admin</Link>
       <Link to="/edit_about" className={getButtonClass("/edit_about")}>About</Link>
       <Link to="/edit_achievements" className={getButtonClass("/edit_achievements")}>Achievements</Link>
       <Link to="/edit_education" className={getButtonClass("/edit_education")}>Education</Link>
