@@ -105,7 +105,7 @@ npm install
 
 Create a `.env` file in `portfolio_backend/`:
 ```env
-PORT=5000
+PORT=3000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 ```
