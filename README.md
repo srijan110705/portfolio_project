@@ -123,7 +123,7 @@ npm install
 
 Create a `.env` file in `portfolio_frontend/`:
 ```env
-VITE_API_URL=http://localhost:5000
+VITE_API_URL=http://localhost:3000
 ```
 
 Start the frontend:
